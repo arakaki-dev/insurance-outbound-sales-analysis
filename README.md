@@ -15,7 +15,7 @@
 - **データ規模**: 4,950コール / 15名の担当者 / 6商品
 - **技術スタック**: Python / pandas / matplotlib / scipy / scikit-learn / Streamlit
 
-🚀 **ダッシュボード（Streamlit Cloud デプロイ後にリンクを追加予定）**
+🚀 **[ダッシュボードをブラウザで見る](https://insurance-outbound-sales-analysis-fnceywlxmfwsva4attlqng.streamlit.app/)**
 
 ---
 
