@@ -1,149 +1,142 @@
-# 📊 生命保険 アウトバウンドコール 営業成績分析ポートフォリオ
-
-> **Life Insurance Outbound Call — Sales Performance Analysis**
-> 分析・統計検定・機械学習・エンジニアリングを生成AIで作成したポートフォリオです。
+# Life Insurance Outbound Call — Sales Performance Analysis
 
 [![CI](https://github.com/arakaki-dev/insurance-outbound-sales-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/arakaki-dev/insurance-outbound-sales-analysis/actions/workflows/ci.yml)
 
 ---
 
-## 🎯 プロジェクト概要
+## Project Overview
 
-生命保険会社のアウトバウンドコール営業データを分析し、**成約率向上に向けたインサイトを導出・統計検証・予測モデル化**するデータ分析パイプラインです。
+A data analysis pipeline on outbound call sales data for a life insurance company, deriving actionable insights, validating them with statistical tests, and building a predictive model to improve conversion rates.
 
-- **分析期間**: 2024年1月〜12月（ダミーデータ、`random.seed(42)` で再現可能）
-- **データ規模**: 4,950コール / 15名の担当者 / 6商品
-- **技術スタック**: Python / pandas / matplotlib / scipy / scikit-learn / Streamlit
+- **Period**: Jan–Dec 2024 (synthetic data, reproducible with `random.seed(42)`)
+- **Scale**: 4,950 calls / 15 agents / 6 products
+- **Stack**: Python / pandas / matplotlib / scipy / scikit-learn / Streamlit
 
-🚀 **[ダッシュボードをブラウザで見る](https://insurance-outbound-sales-analysis-fnceywlxmfwsva4attlqng.streamlit.app/)**
+🚀 **[View Live Dashboard](https://insurance-outbound-sales-analysis-fnceywlxmfwsva4attlqng.streamlit.app/)**
 
 ---
 
-## 📁 ディレクトリ構成
+## Directory Structure
 
 ```
 insurance-outbound-sales-analysis/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml              # GitHub Actions（pytest 自動実行）
-├── generate_data.py            # ダミーデータ自動生成スクリプト
-├── app.py                      # Streamlit インタラクティブダッシュボード
-├── sql_queries.sql             # 分析 SQL（Window関数・複雑CTE含む）
-├── requirements.txt            # 依存ライブラリ
+│       └── ci.yml              # GitHub Actions (auto pytest)
+├── generate_data.py            # Synthetic data generation script
+├── clean_data.py               # Data cleaning pipeline
+├── app.py                      # Streamlit interactive dashboard
+├── sql_queries.sql             # Analytical SQL (window functions, CTEs)
+├── requirements.txt            # Dependencies
 ├── data/
-│   ├── calls.csv               # コール履歴データ（自動生成）
-│   ├── agents.csv              # 担当者マスタ
-│   └── products.csv            # 商品マスタ
+│   ├── calls.csv               # Call history data (auto-generated)
+│   ├── agents.csv              # Agent master
+│   └── products.csv            # Product master
 ├── tests/
-│   └── test_data.py            # データ品質検証テスト（18ケース）
+│   └── test_data.py            # Data quality tests (31 cases)
 └── notebooks/
-    └── analysis.ipynb          # 分析ノートブック（手順・思考プロセス付き）
+    └── analysis.ipynb          # Analysis notebook with reasoning
 ```
 
 ---
 
-## 🚀 セットアップ & 実行方法
+## Setup & Usage
 
 ```bash
 git clone https://github.com/arakaki-dev/insurance-outbound-sales-analysis.git
 cd insurance-outbound-sales-analysis
 pip install -r requirements.txt
 
-# データ生成
+# Generate data
 python generate_data.py
+python clean_data.py
 
-# テスト実行
+# Run tests
 pytest tests/ -v
 
-# ダッシュボード起動
+# Launch dashboard
 streamlit run app.py
 ```
 
 ---
 
-## 📊 分析内容
+## Analysis Modules
 
-| # | 分析項目 | 手法 | ビジネスアクション |
-|---|---------|------|-----------------|
-| 1 | **全体KPIサマリー** | 記述統計・機会損失試算 | 不在率から年間損失コール数を定量化 |
-| 2 | **担当者別パフォーマンス** | 成約率ランキング・散布図 | トップ担当者のノウハウ横展開 |
-| 3 | **統計的有意性検定** | Spearman相関・カイ二乗・Kruskal-Wallis | インサイトの統計的裏付け |
-| 4 | **時間帯別 成約率・接触率** | 二軸グラフ・最適時間帯特定 | コールスケジュールの最適化 |
-| 5 | **顧客属性クロス分析** | ヒートマップ・グループ棒グラフ | コールリスト優先セグメント特定 |
-| 6 | **商品別 成約実績** | 推定年間収益計算 | 重点商品への研修リソース集中 |
-| 7 | **月次トレンド分析** | 3ヶ月移動平均・前月比 | 繁忙期に合わせたリソース計画 |
-| 8 | **成約予測モデル** | Random Forest・5-Fold CV AUC | セグメント別コール優先度スコアリング |
+| # | Module | Method | Business Action |
+|---|--------|--------|-----------------|
+| 1 | **Overall KPI Summary** | Descriptive stats, opportunity cost estimation | Quantify annual lost calls from no-answer rate |
+| 2 | **Agent Performance** | Conversion rate ranking, scatter plot | Scale top-agent practices across team |
+| 3 | **Statistical Significance Tests** | Spearman correlation, Chi-square, Kruskal-Wallis | Validate insights with statistical evidence |
+| 4 | **Hourly Conversion & Contact Rate** | Dual-axis chart, optimal time identification | Optimize call scheduling |
+| 5 | **Customer Attribute Cross-Analysis** | Heatmap, grouped bar chart | Prioritize call list by segment |
+| 6 | **Product Performance** | Estimated annual revenue calculation | Focus training resources on high-yield products |
+| 7 | **Monthly Trend Analysis** | 3-month moving average, MoM change | Align staffing with seasonal patterns |
+| 8 | **Conversion Prediction Model** | Random Forest, 5-Fold CV AUC | Segment-based call priority scoring |
 
 ---
 
-## 🖼️ スクリーンショット
+## Screenshots
 
-### KPI サマリー
+### KPI Summary
 ![KPI Summary](notebooks/kpi_summary.png)
 
-### 担当者別パフォーマンス
+### Agent Performance
 ![Agent Performance](notebooks/agent_performance.png)
 
-### 時間帯別分析
+### Hourly Analysis
 ![Hourly Analysis](notebooks/hourly_analysis.png)
 
-### 顧客属性クロス分析（年齢 × 性別 ヒートマップ）
+### Customer Attribute Cross-Analysis (Age × Gender Heatmap)
 ![Customer Analysis](notebooks/customer_analysis.png)
 
-### 月次トレンド
+### Monthly Trend
 ![Monthly Trend](notebooks/monthly_trend.png)
 
-### 商品別 成約実績
+### Product Performance
 ![Product Analysis](notebooks/product_analysis.png)
 
-### 成約予測モデル（特徴量重要度）
+### Conversion Prediction Model (Feature Importance)
 ![ML Feature Importance](notebooks/ml_feature_importance.png)
 
 ---
 
-## 💡 主要インサイト（分析結果サマリー）
+## Key Insights
 
-1. **経験年数と成約率の相関（Spearman ρ > 0, p < 0.05）** — 経験5年以上の担当者は平均より約3〜5%高い成約率。統計的に有意。
-2. **年齢層と成約率の独立性（カイ二乗検定 p < 0.05）** — 40〜50代が高成約率。コールリスト優先順位付けに活用可能。
-3. **時間帯による成約率の差** — 特定の時間帯に成約が集中。最悪時間帯から最良時間帯へコールを移すだけで月間+XX件の試算。
-4. **Random Forest AUC ≈ 0.65+** — 成約予測モデルがランダム比較を有意に上回り、セグメント別優先度スコアリングに活用可能。
-
----
-
-## 🔧 技術ポイント
-
-### 統計的厳密性
-- **Spearman順位相関**: 経験年数と成約率の単調相関を検証
-- **カイ二乗検定**: 顧客年齢層と成約の独立性を検証
-- **Kruskal-Wallis検定**: チーム間成約率差の有意性を検証（正規分布非仮定の頑健な手法）
-
-### 機械学習
-- **Random Forest（n_estimators=200, class_weight='balanced'）**: 成約予測モデル
-- **5-Fold Stratified Cross Validation**: AUC-ROCでモデル性能を評価
-- **Feature Importance**: コール時間帯・経験年数・顧客属性の相対的な重要度を可視化
-- **セグメント別成約確率テーブル**: 予測確率を用いてコールリスト優先度を定量化
-
-### SQLエンジニアリング（`sql_queries.sql`）
-- `RANK() / DENSE_RANK() OVER (PARTITION BY team)`: チーム内ランキング
-- `LAG()`: 月次前月比
-- `SUM() OVER (ROWS UNBOUNDED PRECEDING)`: YTD累計
-- `AVG() OVER (ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)`: 3ヶ月移動平均
-- `NTILE(4)`: コール優先度四分位スコアリング
-- `PERCENTILE_CONT`: BigQuery向け分位数分析
-
-### データエンジニアリング
-- **再現性**: `random.seed(42)` でデータ生成を完全再現可能
-- **データ品質テスト**: `pytest` で18ケースのスキーマ・値域・ビジネスルール検証
-- **CI/CD**: GitHub Actions でプッシュ時に自動テスト実行
-- **モジュール設計**: データ生成 / 分析 / 可視化を分離した保守性の高い構成
-- **インタラクティブUI**: チーム・期間・顧客属性フィルター、CSVアップロード機能
+1. **Experience vs. Conversion Rate (Spearman ρ > 0, p < 0.05)** — Agents with 5+ years experience convert ~3–5% higher than average. Statistically significant.
+2. **Customer Age Group & Conversion (Chi-square p < 0.05)** — Customers in their 40s–50s show higher conversion rates. Actionable for call list prioritization.
+3. **Hourly Conversion Gap** — Peak hour (14:00, 19.0%) outperforms the lowest hour (12:00, 14.9%) by 4.1 pp. Shifting calls to peak hours projects **+17 conversions/month**.
+4. **Random Forest AUC ≈ 0.65+** — Predictive model significantly outperforms random baseline, enabling segment-level priority scoring for call lists.
 
 ---
 
-## 📬 お問い合わせ
+## Technical Highlights
 
-ご質問・ご相談はお気軽にどうぞ。
+### Statistical Rigor
+- **Spearman Rank Correlation**: Validates monotonic relationship between experience and conversion rate
+- **Chi-square Test**: Tests independence between customer age group and conversion outcome
+- **Kruskal-Wallis Test**: Validates inter-team conversion rate differences without assuming normality
+
+### Machine Learning
+- **Random Forest (n_estimators=200, class_weight='balanced')**: Conversion prediction model
+- **5-Fold Stratified Cross Validation**: Model performance evaluated by AUC-ROC
+- **Feature Importance**: Visualizes relative impact of call hour, experience, and customer attributes
+- **Segment Probability Table**: Quantifies call list priority using predicted conversion probabilities
+
+### SQL Engineering (`sql_queries.sql`)
+- `RANK() / DENSE_RANK() OVER (PARTITION BY team)`: In-team ranking
+- `LAG()`: Month-over-month change
+- `SUM() OVER (ROWS UNBOUNDED PRECEDING)`: YTD cumulative totals
+- `AVG() OVER (ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)`: 3-month moving average
+- `NTILE(4)`: Call priority quartile scoring
+- `PERCENTILE_CONT`: Quantile analysis (BigQuery compatible)
+
+### Data Engineering
+- **Reproducibility**: `random.seed(42)` ensures fully reproducible data generation
+- **Data Quality Tests**: 31 test cases covering schema, value ranges, and business rules via `pytest`
+- **CI/CD**: GitHub Actions runs tests automatically on every push
+- **Modular Design**: Data generation / analysis / visualization separated for maintainability
+- **Interactive UI**: Filters by team, period, and customer attributes; CSV upload support
 
 ---
 
-*このポートフォリオはダミーデータを使用しています。実際の業務データは含みません。*
+*This portfolio uses synthetic data. No real customer or business data is included.*
